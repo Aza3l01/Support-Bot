@@ -75,7 +75,85 @@ async def on_member_leave(event: hikari.MemberDeleteEvent) -> None:
     except Exception as e:
         print(f"Failed to send leave message for {member}: {e}")
 
-# Embed
+# Welcome embed
+@bot.command
+@lightbulb.command("welcome", "welcome embed")
+@lightbulb.implements(lightbulb.SlashCommand)
+async def welcome(ctx: lightbulb.Context):
+    CHANNEL_ID = 1006206543240364052
+    
+    member = await ctx.bot.rest.fetch_member(ctx.guild_id, ctx.author.id)
+    if not any(role.permissions & hikari.Permissions.ADMINISTRATOR for role in member.get_roles()):
+        await ctx.respond("This isn't a command you should be using. 🤦")
+        return
+
+    try:
+        channel = await ctx.bot.rest.fetch_channel(CHANNEL_ID)
+    except hikari.NotFoundError:
+        await ctx.respond("The specified channel could not be found.")
+        return
+    
+    embed = hikari.Embed(
+        title="👋 Welcome! 👋",
+        description=(
+            f"**Welcome to the official support server for Insult Bot. Feel free to go through the channels linked in the server map or for quick help go to <#1006208568837554226> and let us know of your issue.**\n\n"
+            "**Server Map:**\n\n"
+            f"<#1006206593257459785>\nRead the rules here.\n\n"
+            f"<#1006206637196988426>\nKeep an eye on announcements, bot updates and issues here.\n\n"
+            f"<#1267399130527961149>\nTake a look at the perks you receive by subscribing here.\n\n"
+            f"<#1006227022340706395>\nQuick guide to use Insult Bot here.\n\n"
+            f"<#1267399199843024928>\nRead the frequently asked questions here.\n\n"
+            f"<#1006209552557035530>\nChat with members about Insult Bot or anything off-topic here.\n\n"
+            f"<#1243873717260386325>\nSupporters exclusive channel (Invisible to normal members).\n\n"
+            f"<#1267395551352193157>\nDrop your suggesstions here.\n\n"
+            f"<#1006208568837554226>\nAsk for help here.\n\n"
+            f"*Feel free to ping {ctx.author.mention} if you have any questions!*"
+        ),
+        color=0x2B2D31
+    )
+    embed.set_image("https://i.imgur.com/qMZebSg.png")
+    await ctx.bot.rest.create_message(CHANNEL_ID, embed=embed)
+
+# Rules embed
+@bot.command
+@lightbulb.command("rules", "rules embed")
+@lightbulb.implements(lightbulb.SlashCommand)
+async def rules(ctx: lightbulb.Context):
+    CHANNEL_ID = 1006206593257459785
+    
+    member = await ctx.bot.rest.fetch_member(ctx.guild_id, ctx.author.id)
+    if not any(role.permissions & hikari.Permissions.ADMINISTRATOR for role in member.get_roles()):
+        await ctx.respond("This isn't a command you should be using. 🤦")
+        return
+
+    try:
+        channel = await ctx.bot.rest.fetch_channel(CHANNEL_ID)
+    except hikari.NotFoundError:
+        await ctx.respond("The specified channel could not be found.")
+        return
+    
+    embed = hikari.Embed(
+        title="📜 Rules 📜",
+        description=(
+            "**1.** Do not share any private information.\n\n"
+            "**2.** Keep things in their respective channels.\n\n"
+            "**3.** Server leeching or raiding will result in an immediate ban.\n\n"
+            "**4.** Toxic, racist, sexist, or homophobic slurs are not allowed.\n\n"
+            "**5.** Do not advertise servers, accounts, or sell servers or accounts.\n\n"
+            "**6.** Try not ghost ping staff members.\n\n"
+            "**7.** Flashing emotes are discouraged but allowed, epileptic users are expected to have reduced motion on.\n\n"
+            "**8.** Do not talk about sensitive topics like suicide and self-harm. Seek professional help.\n\n"
+            "**9.** Do not play around the rules and find out, just use your common sense and be a decent person.\n\n"
+            "**Disciplinary System:**\n"
+            "Warn in chat -> Timeout (1 day) -> Timeout (1 week) -> Kick -> Ban\n\n"
+            f"*Feel free to ping {ctx.author.mention} if you have any questions!*"
+        ),
+        color=0x2B2D31
+    )
+    embed.set_image("https://i.imgur.com/qMZebSg.png")
+    await ctx.bot.rest.create_message(CHANNEL_ID, embed=embed)
+
+# Premium embed
 @bot.command
 @lightbulb.command("premium", "premium embed")
 @lightbulb.implements(lightbulb.SlashCommand)
