@@ -189,4 +189,38 @@ async def premium(ctx: lightbulb.Context):
     embed.set_image("https://i.imgur.com/qMZebSg.png")
     await ctx.bot.rest.create_message(CHANNEL_ID, embed=embed)
 
+# FAQ embed
+@bot.command
+@lightbulb.command("faq", "faq embed")
+@lightbulb.implements(lightbulb.SlashCommand)
+async def faq(ctx: lightbulb.Context):
+    CHANNEL_ID = 1267399199843024928
+    
+    member = await ctx.bot.rest.fetch_member(ctx.guild_id, ctx.author.id)
+    if not any(role.permissions & hikari.Permissions.ADMINISTRATOR for role in member.get_roles()):
+        await ctx.respond("This isn't a command you should be using. 🤦")
+        return
+
+    try:
+        channel = await ctx.bot.rest.fetch_channel(CHANNEL_ID)
+    except hikari.NotFoundError:
+        await ctx.respond("The specified channel could not be found.")
+        return
+    
+    embed = hikari.Embed(
+        title="❓ Frequently Asked Questions ❓",
+        description=(
+            "**Why is `/customonly` command not working for me?**\n"
+            "The command requires you to have at least one custom insult and one custom trigger added to your server to function.\n\n"
+            "**Does Insult Bot have a dashboard/website?**\n"
+            "Insult Bot currently does not have a website but there are plans to develop a dedicated website in the future. The closest thing to a website right now is a [page over at top.gg](https://top.gg/bot/801431445452750879).\n\n"
+            "**Why is premium a thing?**\n"
+            "AI generation and hosting a bot costs money. Premium is a way for me to cover these costs while providing additional commands and support to users who wish to pay.\n\n"
+            f"*Feel free to ping {ctx.author.mention} if you have any questions!*"
+        ),
+        color=0x2B2D31
+    )
+    embed.set_image("https://i.imgur.com/qMZebSg.png")
+    await ctx.bot.rest.create_message(CHANNEL_ID, embed=embed)
+
 bot.run()
