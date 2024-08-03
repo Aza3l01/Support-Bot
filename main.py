@@ -175,9 +175,8 @@ async def premium(ctx: lightbulb.Context):
         title="❤️ Premium Perks ❤️",
         description=(
             "**Access To Premium Commands Like:**\n"
-            "• Add insults/triggers.\n"
+            "• Add custom insults.\n"
             "• Insult Bot will remember your conversations.\n"
-            "• Customize AI Chatbot style.\n"
             "• Remove cool-downs.\n\n"
             "**Support Server Related Perks Like:**\n"
             "• Access to behind the scenes discord channels.\n"
