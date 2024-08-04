@@ -8,8 +8,8 @@ bot = lightbulb.BotApp(
     intents=hikari.Intents.ALL_UNPRIVILEGED | hikari.Intents.GUILD_MEMBERS
 )
 
-LOG_CHANNEL_ID = int(os.getenv('LOG_CHANNEL_ID'))
-AUTO_ASSIGN_ROLE_ID = int(os.getenv('AUTO_ASSIGN_ROLE_ID'))
+LOG_CHANNEL_ID = 1268882823574454364
+AUTO_ASSIGN_ROLE_ID = 1006199315410190397
 
 # Presence
 @bot.listen(hikari.StartedEvent)
