@@ -101,7 +101,6 @@ async def on_member_leave(event: hikari.MemberDeleteEvent) -> None:
 #             f"<#1006206593257459785>\nRead the rules here.\n\n"
 #             f"<#1006206637196988426>\nKeep an eye on announcements, bot updates and issues here.\n\n"
 #             f"<#1267399130527961149>\nTake a look at the perks you receive by subscribing here.\n\n"
-#             f"<#1006227022340706395>\nQuick guide to use Insult Bot here.\n\n"
 #             f"<#1267399199843024928>\nRead the frequently asked questions here.\n\n"
 #             f"<#1006209552557035530>\nChat with members about Insult Bot or anything off-topic here.\n\n"
 #             f"<#1243873717260386325>\nSupporters exclusive channel (Invisible to normal members).\n\n"
